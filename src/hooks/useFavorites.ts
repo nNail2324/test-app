@@ -6,14 +6,12 @@ export function useFavorites() {
 
   const isFavorite = (id: string) => Boolean(favorites.indexOf(id));
 
-  const toggle = (id: string) => {
-    const index = favorites.indexOf(id);
-    if (index === -1) {
-      favorites.push(id);
-    } else {
-      favorites.splice(index, 1);
-    }
-    setFavorites(favorites);
+  const toggle = (id: string): void => {
+    setFavorites((current) =>
+      current.includes(id)
+        ? current.filter((favoriteId) => favoriteId !== id)
+        : [...current, id],
+    );
   };
 
   return { favorites, isFavorite, toggle };
